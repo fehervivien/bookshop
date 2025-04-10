@@ -1,5 +1,7 @@
-package main.java.com.example.bookshop.repository;
+package com.bookshop.repository;
+import com.bookshop.model.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public class BookRepository {
-    
+public interface BookRepository extends JpaRepository<Book, Long> {
+    // További egyedi lekérdezésekhez lehetőségek
 }
