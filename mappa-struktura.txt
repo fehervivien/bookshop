@@ -1,0 +1,40 @@
+bookshop/
+├── .github/
+│   └── workflows/
+│       └── ci.yml             # GitHub Actions CI konfiguráció
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── example/
+│   │   │           └── bookshop/
+│   │   │               ├── controller/
+│   │   │               │   └── BookController.java       # BookController
+│   │   │               ├── entity/
+│   │   │               │   ├── Book.java                # Book entity
+│   │   │               │   ├── Customer.java            # Customer entity
+│   │   │               │   └── Order.java               # Order entity
+│   │   │               ├── repository/
+│   │   │               │   ├── BookRepository.java      # BookRepository
+│   │   │               │   ├── CustomerRepository.java  # CustomerRepository
+│   │   │               │   └── OrderRepository.java     # OrderRepository
+│   │   │               ├── service/
+│   │   │               │   ├── BookService.java         # BookService
+│   │   │               │   ├── CustomerService.java     # CustomerService
+│   │   │               │   └── OrderService.java        # OrderService
+│   │   │               └── BookshopApplication.java      # Alkalmazás indító osztály
+│   │   ├── resources/
+│   │   │   ├── application.properties  # Spring beállítások
+│   │   │   └── static/                 # Statikus fájlok (pl. CSS, JS)
+│   │   │       └── index.html          # Kezdőlap
+│   │   └── test/
+│   │       └── java/
+│   │           └── com/
+│   │               └── example/
+│   │                   └── bookshop/
+│   │                       └── BookControllerTest.java  # Tesztek a Controllerhez
+├── .gitignore                          # Git ignorálás fájl (pl. target mappa)
+├── mvnw                                # Maven wrapper
+├── mvnw.cmd                            # Maven wrapper Windows esetén
+├── pom.xml                              # Maven projekt fájl
+└── README.md                           # Projekt dokumentáció
