@@ -1,9 +1,12 @@
-package com.bookshop.model;
+package com.example.bookshop.entity;
 
-import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
+
+import jakarta.persistence.GenerationType;
 
 @Entity
-public class Book {
+public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,10 +16,11 @@ public class Book {
     private String author;
     private double price;
 
-    // Constructors
+    // Alapértelmezett konstruktor (JPA-hoz szükséges)
     public Book() {
     }
 
+    // Paraméteres konstruktor
     public Book(String title, String author, double price) {
         this.title = title;
         this.author = author;
@@ -54,5 +58,21 @@ public class Book {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    // equals és hashCode metódusok
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

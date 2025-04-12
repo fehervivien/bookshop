@@ -1,13 +1,13 @@
-package com.bookshop.controller;
+package com.example.bookshop.controller;
 
-import com.bookshop.model.Book;
-import com.bookshop.service.BookService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.example.bookshop.entity.Book;
+import com.example.bookshop.service.BookService;
 
 @RestController
 @RequestMapping("/api/books")
@@ -28,7 +28,7 @@ public class BookController {
     }
 
     // Get all books
-    @GetMapping
+    @GetMapping(value = "")
     public ResponseEntity<List<Book>> getAllBooks() {
         List<Book> books = bookService.getAllBooks();
         return new ResponseEntity<>(books, HttpStatus.OK);

@@ -1,5 +1,47 @@
-package main.java.com.example.bookshop.service;
+package com.example.bookshop.service;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.bookshop.entity.Customer;
+import com.example.bookshop.repository.CustomerRepository;
+
+
+@Service
 public class CustomerService {
-    
+
+    private final CustomerRepository customerRepository;
+
+    @Autowired
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
+    // Új customer mentése
+    public Customer saveCustomer(Customer customer) {
+        return customerRepository.save(customer);
+    }
+
+    // Összes customer lekérdezése
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
+    }
+
+    // Egy customer lekérdezése ID alapján
+    public Optional<Customer> getCustomerById(Long id) {
+        return customerRepository.findById(id);
+    }
+
+    // Customer törlése ID alapján
+    public void deleteCustomer(Long id) {
+        customerRepository.deleteById(id);
+    }
+
+    // Email alapján keresés (ha kellene valahol)
+    public Optional<Customer> getCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email);
+    }
 }

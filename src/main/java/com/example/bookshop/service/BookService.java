@@ -1,12 +1,14 @@
-package com.bookshop.service;
+package com.example.bookshop.service;
 
-import com.bookshop.model.Book;
-import com.bookshop.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.bookshop.entity.Book;
+import com.example.bookshop.repository.BookRepository;
 
 @Service
 public class BookService {

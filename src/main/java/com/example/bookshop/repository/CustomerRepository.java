@@ -1,5 +1,13 @@
-package main.java.com.example.bookshop.repository;
+package com.example.bookshop.repository;
 
-public class CustomerRepository {
-    
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.bookshop.entity.Customer;
+
+
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
+    Optional<Customer> findByEmail(String email);
 }
+

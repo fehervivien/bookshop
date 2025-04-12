@@ -1,40 +1,71 @@
 bookshop/
 ├── .github/
 │   └── workflows/
-│       └── ci.yml             # GitHub Actions CI konfiguráció
+│       └── ci.yml
+├── .git/
 ├── src/
 │   ├── main/
 │   │   ├── java/
 │   │   │   └── com/
 │   │   │       └── example/
 │   │   │           └── bookshop/
+│   │   │               ├── BookshopApplication.java
 │   │   │               ├── controller/
-│   │   │               │   └── BookController.java       # BookController
+│   │   │               │   ├── Autowired.java
+│   │   │               │   ├── BookController.java
+│   │   │               │   ├── CustomerController.java
+│   │   │               │   ├── DeleteMapping.java
+│   │   │               │   ├── GetMapping.java
+│   │   │               │   ├── OrderController.java
+│   │   │               │   ├── PathVariable.java
+│   │   │               │   ├── PostMapping.java
+│   │   │               │   ├── PutMapping.java
+│   │   │               │   ├── RequestBody.java
+│   │   │               │   ├── RequestMapping.java
+│   │   │               │   └── RestController.java
 │   │   │               ├── entity/
-│   │   │               │   ├── Book.java                # Book entity
-│   │   │               │   ├── Customer.java            # Customer entity
-│   │   │               │   └── Order.java               # Order entity
+│   │   │               │   ├── Book.java
+│   │   │               │   ├── Customer.java
+│   │   │               │   ├── Entity.java
+│   │   │               │   ├── GeneratedValue.java
+│   │   │               │   ├── Id.java
+│   │   │               │   ├── JoinColumn.java
+│   │   │               │   ├── ManyToOne.java
+│   │   │               │   ├── Order.java
+│   │   │               │   └── Table.java
 │   │   │               ├── repository/
-│   │   │               │   ├── BookRepository.java      # BookRepository
-│   │   │               │   ├── CustomerRepository.java  # CustomerRepository
-│   │   │               │   └── OrderRepository.java     # OrderRepository
-│   │   │               ├── service/
-│   │   │               │   ├── BookService.java         # BookService
-│   │   │               │   ├── CustomerService.java     # CustomerService
-│   │   │               │   └── OrderService.java        # OrderService
-│   │   │               └── BookshopApplication.java      # Alkalmazás indító osztály
+│   │   │               │   ├── BookRepository.java
+│   │   │               │   ├── CustomerRepository.java
+│   │   │               │   ├── OrderRepository.java
+│   │   │               │   └── Repository.java
+│   │   │               └── service/
+│   │   │                   ├── BookService.java
+│   │   │                   ├── CustomerService.java
+│   │   │                   ├── OrderService.java
+│   │   │                   ├── OrderServiceImpl.java
+│   │   │                   └── Service.java
 │   │   ├── resources/
-│   │   │   ├── application.properties  # Spring beállítások
-│   │   │   └── static/                 # Statikus fájlok (pl. CSS, JS)
-│   │   │       └── index.html          # Kezdőlap
+│   │   │   ├── application.properties
+│   │   │   └── static/
+│   │   │       └── index.html
 │   │   └── test/
 │   │       └── java/
 │   │           └── com/
 │   │               └── example/
 │   │                   └── bookshop/
-│   │                       └── BookControllerTest.java  # Tesztek a Controllerhez
-├── .gitignore                          # Git ignorálás fájl (pl. target mappa)
-├── mvnw                                # Maven wrapper
-├── mvnw.cmd                            # Maven wrapper Windows esetén
-├── pom.xml                              # Maven projekt fájl
-└── README.md                           # Projekt dokumentáció
+│   │                       └── BookControllerTest.java
+├── target/
+│   ├── classes/
+│   │   ├── application.properties
+│   │   └── static/
+│   │       └── index.html
+│   ├── generated-sources/
+│   │   └── annotations/
+│   └── maven-status/
+│       └── maven-compiler-plugin/
+│           └── compile/
+│               └── default-compile/
+│                   ├── inputFiles.lst
+│                   └── createdFiles.lst
+├── pom.xml
+└── README.md
