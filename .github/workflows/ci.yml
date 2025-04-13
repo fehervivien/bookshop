@@ -1,0 +1,29 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches:
+      - master  # vagy main, ha az a főágad
+  pull_request:
+    branches:
+      - master  # vagy main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout kód
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up JDK 17 (válaszd ki a verziót, ami a projektedhez illeszkedik)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adoptopenjdk'
+
+      # Build és tesztelés Maven-nel
+      - name: Build with Maven
+        run: mvn clean install
