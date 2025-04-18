@@ -40,7 +40,8 @@ public class BookController {
     public String createBook(Book book) {
         // könyv mentése
         bookService.saveBook(book);
-        return "redirect:/books"; // Új könyv után visszairányítjuk az összes könyv listájához
+        // Új könyv után visszairányítjuk az összes könyv listájához
+        return "redirect:/books"; 
     }
 
     // -----------------------
@@ -50,8 +51,10 @@ public class BookController {
     public String getAllBooks(Model model) {
         // könyvek lekérdezése
         List<Book> books = bookService.getAllBooks();
-        model.addAttribute("books", books); // Könyvek listájának hozzáadása a modelhez
-        return "book-list"; // Visszatérés a "book-list" nevű Thymeleaf sablonhoz
+        // Könyvek listájának hozzáadása a modelhez
+        model.addAttribute("books", books); 
+        // Visszatérés a "book-list" nevű Thymeleaf sablonhoz
+        return "book-list"; 
     }
 
     // -----------------------
@@ -63,9 +66,11 @@ public class BookController {
         Book book = bookService.getBookById(id);
         if (book != null) {
             model.addAttribute("book", book);
-            return "book-detail"; // Visszatérés a "book-detail" sablonhoz
+            // Visszatérés a "book-detail" sablonhoz
+            return "book-detail"; 
         } else {
-            return "redirect:/books"; // Ha nem található, visszairányítjuk az összes könyvhöz
+            // Ha nem található, visszairányítjuk az összes könyvhöz
+            return "redirect:/books"; 
         }
     }
 
@@ -76,7 +81,8 @@ public class BookController {
     public String updateBook(@PathVariable Long id, Book book) {
         // könyv frissítése
         bookService.updateBook(id, book);
-        return "redirect:/books"; // Könyv frissítése után visszairányítjuk az összes könyv listájához
+        // Könyv frissítése után visszairányítjuk az összes könyv listájához
+        return "redirect:/books"; 
     }
 
     // -----------------------
@@ -86,6 +92,7 @@ public class BookController {
     public String deleteBook(@PathVariable Long id) {
         // törlés
         bookService.deleteBook(id);
-        return "redirect:/books"; // Törlés után visszairányítjuk az összes könyvhöz
+        // Törlés után visszairányítjuk az összes könyvhöz
+        return "redirect:/books"; 
     }
 }
