@@ -3,9 +3,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.bookshop.entity.Book;
 
-/*A BookRepository interfész fogja kezelni az adatbázis műveleteket. 
-Ehhez a Spring Data JPA-t fogom használni, ami automatikusan 
-implementálja az alapvető CRUD műveleteket. */
+/*
+   A BookRepository egy interfész, amely az adatbázisban tárolt könyvek 
+   (Book entitások) kezelésére szolgál. Ez az interfész nem tartalmaz 
+   saját metódusokat, hanem örökli a JpaRepository összes funkcióját. 
+   A Spring magától írja meg.
+*/
 
 public interface BookRepository extends JpaRepository<Book, Long> {
     // További egyedi lekérdezésekhez lehetőségek

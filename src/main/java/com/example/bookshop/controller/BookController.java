@@ -3,14 +3,27 @@ package com.example.bookshop.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.bookshop.entity.Book;
 import com.example.bookshop.service.BookService;
 
-@RestController
-@RequestMapping("/api/books")
+/*  
+ * A BookController osztály a könyvek kezeléséért felelős
+ * a Spring MVC keretrendszerben.
+ * Ez az osztály kezeli a könyvekkel kapcsolatos HTTP kéréseket,
+ * mint például a könyvek létrehozása, lekérdezése, frissítése és törlése.
+*/
+
+@Controller
+@RequestMapping("/books")
 public class BookController {
 
     private final BookService bookService;
@@ -20,50 +33,59 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    // Create a new book
+    // -----------------------
+    // Könyv létrehozása
+    // -----------------------
     @PostMapping
-    public ResponseEntity<Book> createBook(@RequestBody Book book) {
-        Book savedBook = bookService.saveBook(book);
-        return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
+    public String createBook(Book book) {
+        // könyv mentése
+        bookService.saveBook(book);
+        return "redirect:/books"; // Új könyv után visszairányítjuk az összes könyv listájához
     }
 
-    // Get all books
-    @GetMapping(value = "")
-    public ResponseEntity<List<Book>> getAllBooks() {
+    // -----------------------
+    // Összes könyv lekérdezése
+    // -----------------------
+    @GetMapping
+    public String getAllBooks(Model model) {
+        // könyvek lekérdezése
         List<Book> books = bookService.getAllBooks();
-        return new ResponseEntity<>(books, HttpStatus.OK);
+        model.addAttribute("books", books); // Könyvek listájának hozzáadása a modelhez
+        return "book-list"; // Visszatérés a "book-list" nevű Thymeleaf sablonhoz
     }
 
-    // Get book by ID
+    // -----------------------
+    // Egy könyv lekérdezése ID alapján
+    // -----------------------
     @GetMapping("/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable Long id) {
+    public String getBookById(@PathVariable Long id, Model model) {
+        // könyv lekérdezése
         Book book = bookService.getBookById(id);
         if (book != null) {
-            return new ResponseEntity<>(book, HttpStatus.OK);
+            model.addAttribute("book", book);
+            return "book-detail"; // Visszatérés a "book-detail" sablonhoz
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return "redirect:/books"; // Ha nem található, visszairányítjuk az összes könyvhöz
         }
     }
 
-    // Update an existing book
+    // -----------------------
+    // Könyv frissítése
+    // -----------------------
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book) {
-        Book updatedBook = bookService.updateBook(id, book);
-        if (updatedBook != null) {
-            return new ResponseEntity<>(updatedBook, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public String updateBook(@PathVariable Long id, Book book) {
+        // könyv frissítése
+        bookService.updateBook(id, book);
+        return "redirect:/books"; // Könyv frissítése után visszairányítjuk az összes könyv listájához
     }
 
-    // Delete a book
+    // -----------------------
+    // Könyv törlése
+    // -----------------------
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
-        boolean isDeleted = bookService.deleteBook(id);
-        if (isDeleted) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public String deleteBook(@PathVariable Long id) {
+        // törlés
+        bookService.deleteBook(id);
+        return "redirect:/books"; // Törlés után visszairányítjuk az összes könyvhöz
     }
 }

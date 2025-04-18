@@ -10,25 +10,46 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/*
+    Az Order osztály a rendszerben rögzített könyvrendeléseket (megrendeléseket)
+    képviseli (orders tábla). A JPA (Java Persistence API) segítségével tárolja 
+    az adatokat.
+*/
+
+// Ez az osztály egy JPA entitás (az adatbázis egyik táblájának felel meg)
 @Entity
-@Table(name = "orders") 
+// Az adatbázisban az "orders" nevű táblához lesz leképezve
+@Table(name = "orders")
 public class Order {
 
+    // Id: a tábla elsődleges kulcsa (primary key)
     @Id
+    // Az adatbázis automatikusan generálja az id-t
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
+    // Az id mező
+    private Long id;
+    // A rendelés dátuma
     private LocalDate orderDate;
 
+    // Egy rendelés egy vásárlóhoz (Customer) tartozik
     @ManyToOne
+    // Az adatbázisban a kapcsolódó customer_id oszlopot használja
     @JoinColumn(name = "customer_id")
+
+    // Vásárló (Customer) entitás
     private Customer customer;
 
+    // Egy rendelés egy könyvhöz (Book) kapcsolódik
     @ManyToOne
+    // Az adatbázisban a kapcsolódó book_id oszlopot használja
     @JoinColumn(name = "book_id")
     private Book book;
 
-    // Alapértelmezett konstruktor
+    /*
+     * Alapértelmezett konstruktor (JPA-hoz szükséges, hogy üresen is létre
+     * lehessen hozni az objektumot)
+     */
     public Order() {
     }
 
@@ -39,7 +60,7 @@ public class Order {
         this.book = book;
     }
 
-    // Getterek és setterek
+    // Getterek és Setterek
     public Long getId() {
         return id;
     }
@@ -68,19 +89,27 @@ public class Order {
         this.book = book;
     }
 
-    // equals és hashCode metódusok
+    // equals: két Order objektumot azonosnak tekintünk, ha az id-jük megegyezik
     @Override
     public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
+        // a paramétert Order típusúra konvertáljuk
         Order order = (Order) o;
         return id != null && id.equals(order.id);
     }
 
+    // hashCode: az id mező alapján generálja a hash értéket
     @Override
     public int hashCode() {
         return getClass().hashCode();
     }
+
+    @Override
+    public String toString() {
+        return "Order{id=" + id + ", orderDate=" + orderDate + "}";
+    }
+
 }

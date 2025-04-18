@@ -3,13 +3,28 @@ package com.example.bookshop.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.bookshop.entity.Customer;
 import com.example.bookshop.service.CustomerService;
 
-@RestController
-@RequestMapping("/api/customers")
+/* 
+ * A CustomerController osztály felelős a vásárlók létrehozásáért, 
+ * lekérdezéséért és törléséért.
+ * A Spring MVC keretrendszer segítségével valósítja meg a HTTP kérések kezelését.
+*/ 
+
+//Ez az osztály vezérlőként működik a Spring MVC keretrendszerben.
+@Controller 
+//Az összes vásárlóval kapcsolatos kérést a "/customers" URL-re irányítja.
+@RequestMapping("/customers")
+
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -19,31 +34,55 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    // Új customer létrehozása
+    // -----------------------
+    // Vásárló létrehozása
+    // -----------------------
     @PostMapping
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        Customer saved = customerService.saveCustomer(customer);
-        return ResponseEntity.ok(saved);
+    public String createCustomer(Customer customer) {
+        // vásárló mentése
+        customerService.saveCustomer(customer);
+        // Visszairányítás a vásárlók listájához
+        return "redirect:/customers"; 
     }
 
-    // Összes customer lekérdezése
-    @GetMapping(value = "")
-    public ResponseEntity<List<Customer>> getAllCustomers() {
-        return ResponseEntity.ok(customerService.getAllCustomers());
+    // -----------------------
+    // Összes vásárló lekérdezése
+    // -----------------------
+    @GetMapping
+    public String getAllCustomers(Model model) {
+        // vásárlók lekérdezése
+        List<Customer> customers = customerService.getAllCustomers();
+        // Vásárlók listájának hozzáadása a modelhez
+        model.addAttribute("customers", customers); 
+        // Visszatérés a "customer-list" nevű Thymeleaf sablonhoz
+        return "customer-list"; 
     }
 
-    // Egy customer lekérdezése ID alapján
+    // -----------------------
+    // Vásárló lekérdezése ID alapján
+    // -----------------------
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
-        return customerService.getCustomerById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public String getCustomerById(@PathVariable Long id, Model model) {
+        // vásárló lekérdezése
+        Customer customer = customerService.getCustomerById(id).orElse(null);
+        if (customer != null) {
+            model.addAttribute("customer", customer);
+            // Visszatérés a "customer-detail" sablonhoz
+            return "customer-detail"; 
+        } else {
+            // Ha nem található, visszairányítjuk a vásárlók listájához
+            return "redirect:/customers"; 
+        }
     }
 
-    // Customer törlése ID alapján
+    // -----------------------
+    // Vásárló törlése
+    // -----------------------
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
+    public String deleteCustomer(@PathVariable Long id) {
+        // törlés
         customerService.deleteCustomer(id);
-        return ResponseEntity.noContent().build();
+        // Törlés után visszairányítjuk a vásárlók listájához
+        return "redirect:/customers"; 
     }
 }

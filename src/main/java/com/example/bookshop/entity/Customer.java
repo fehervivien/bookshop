@@ -8,28 +8,44 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+/*  
+    A Customer osztály a vásárlókat reprezentálja az adatbázisban
+    és a JPA (Java Persistence API) segítségével tárolja az adatokat.
+*/
+
+// Ez az annotáció jelzi, hogy ez az osztály egy JPA entitás, 
+// egy adatbázistáblát képvisel
+@Entity 
+/* Serializable: a Customer osztály példányai bájtokká alakíthatók, 
+   így elmenthetők vagy továbbíthatók. (pl.: adatbázisba, fájlba mentés)
+*/
 public class Customer implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // Az 'id' mező lesz az elsődleges kulcs (primary key)
+    @Id 
+    // Az adatbázis automatikusan generálja az ID-t (pl. AUTO_INCREMENT)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+
+    // Az 'id' mező egyedi azonosítója a vásárlónak
     private Long id;
 
-    private String name;
+    private String name;   // A vásárló neve
+    private String email;  // A vásárló e-mail címe
 
-    private String email;
-
-    // Alapértelmezett konstruktor
+    // Alapértelmezett konstruktor 
+    //(JPA-hoz szükséges, hogy üresen példányosítani lehessen)
     public Customer() {
     }
 
-    // Konstruktor minden mezőre kivéve az id-t
+    // Paraméteres konstruktor az új vásárlók egyszerű létrehozásához 
+    // (ID nélkül, mert azt az adatbázis generálja)
     public Customer(String name, String email) {
         this.name = name;
         this.email = email;
     }
 
-    // Getterek és setterek
+    // Getterek és setterek 
+
     public Long getId() {
         return id;
     }
@@ -54,19 +70,28 @@ public class Customer implements Serializable {
         this.email = email;
     }
 
-    // equals és hashCode metódusok
+    // equals() és hashCode() metódusokat felüldefiniáljuk, 
+    // hogy két Customer objektum összehasonlítható legyen ID alapján
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        // ha ugyanaz az objektum akkor true
+        if (this == o) 
             return true;
-        if (o == null || getClass() != o.getClass())
+        // ha null vagy nem ugyanaz a típus akkor false
+        if (o == null || getClass() != o.getClass()) 
             return false;
-        Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id);
+        /* Cast-eljük (átalakítás) az objektumot Customer típusra, 
+           hogy utána a customer.id elérhető legyen.*/
+        Customer customer = (Customer) o; 
+
+        // Csak az ID alapján hasonlítjuk össze
+        return Objects.equals(id, customer.id); 
     }
 
+    // hashCode() metódus, amely biztosítja a vásárló egyediségét az ID alapján
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        // hashCode ID alapján generálódik
+        return Objects.hash(id); 
     }
 }

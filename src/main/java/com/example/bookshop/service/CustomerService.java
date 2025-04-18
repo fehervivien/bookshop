@@ -9,12 +9,18 @@ import org.springframework.stereotype.Service;
 import com.example.bookshop.entity.Customer;
 import com.example.bookshop.repository.CustomerRepository;
 
+/* 
+    A CustomerService osztály a vásárlók kezeléséért felelős
+    Ez az osztály tartalmazza a vásárlók mentésére, lekérdezésére,
+    frissítésére és törlésére vonatkozó logikát.
+*/
 
 @Service
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
 
+    // A Spring automatikusan beadja a CustomerRepository példányt
     @Autowired
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;

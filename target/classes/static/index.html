@@ -1,28 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Web Application</title>
-    <link rel="stylesheet" href="styles.css">
-
-
+    <title>Egyszerű Weboldal</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
 <body>
-    <header>
-        <h1>Welcome to My Web Application</h1>
+
+    <!-- Navigációs Menü -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Bookshop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Főoldal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Könyvek</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Kapcsolat</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Fejléc -->
+    <header class="bg-primary text-white text-center py-5">
+        <h1>Üdvözöllek a Bookshop-on!</h1>
+        <p>Ha érdekel a programozás, itt minden könyvet megtalálsz!</p>
     </header>
-    <main>
-        <section id="content">
-            <h2>Content Section</h2>
-            <p>This is where the main content will go.</p>
-        </section>
-        <section id="sidebar">
-            <h2>Sidebar Section</h2>
-            <p>This is where the sidebar content will go.</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2023 My Web Application</p>
+
+    <!-- Tartalom -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <h2>Téma 1</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia felis at lectus facilisis, id volutpat ligula scelerisque.</p>
+                <button class="btn btn-primary">Olvass tovább</button>
+            </div>
+            <div class="col-lg-4">
+                <h2>Téma 2</h2>
+                <p>Curabitur venenatis ut dui non facilisis. Suspendisse potenti. Nullam non erat ac nisl cursus gravida.</p>
+                <button class="btn btn-secondary">Tovább</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lábléc -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2025 Weboldal | Minden jog fenntartva.</p>
     </footer>
 
+    <!-- Bootstrap JS és Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+</body>
 </html>

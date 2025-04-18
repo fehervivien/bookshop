@@ -1,6 +1,5 @@
 package com.example.bookshop.service;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -10,47 +9,65 @@ import org.springframework.stereotype.Service;
 import com.example.bookshop.entity.Book;
 import com.example.bookshop.repository.BookRepository;
 
+/* 
+    A BookService osztály a könyvek kezeléséért felelős
+    Ez az osztály tartalmazza a könyvek mentésére, lekérdezésére,
+    frissítésére és törlésére vonatkozó logikát.
+*/
+
+// Ez az annotáció azt jelzi a Spring Boot számára, 
+// hogy ez egy "szolgáltatás" osztály, amit a Spring kezelni fog.
 @Service
 public class BookService {
 
     private final BookRepository bookRepository;
 
+    // A Spring automatikusan beadja a BookRepository példányt
     @Autowired
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 
-    // Save a book
+    // Új könyv mentése az adatbázisba
     public Book saveBook(Book book) {
+        // A .save() metódus automatikusan menti, vagy frissíti az entitást.
         return bookRepository.save(book);
     }
 
-    // Get all books
+    // Az összes könyv lekérése
     public List<Book> getAllBooks() {
+        // Visszaadja az összes könyvet a táblából.
         return bookRepository.findAll();
     }
 
-    // Get a book by ID
+    // Egy könyv lekérése ID alapján
     public Book getBookById(Long id) {
+        // Az Optional lehet üres is, ha nincs ilyen ID-jű könyv
         Optional<Book> book = bookRepository.findById(id);
-        return book.orElse(null); // Ha nincs találat, akkor null-t ad vissza
+        // Ha van találat, visszaadja, ha nincs, akkor null-t
+        return book.orElse(null); //
     }
 
-    // Update a book
+    // Könyv frissítése meglévő ID alapján
     public Book updateBook(Long id, Book book) {
+        // Csak akkor frissítjük, ha a könyv létezik
         if (bookRepository.existsById(id)) {
+            // Biztosítjuk, hogy az ID egyezzen
             book.setId(id);
+            // Mentjük a módosított könyvet
             return bookRepository.save(book);
         }
-        return null; // Ha nem létezik a könyv, akkor null-t ad vissza
+        return null; // Ha nincs ilyen ID-jű könyv, akkor null
     }
 
-    // Delete a book
+    // Könyv törlése ID alapján
     public boolean deleteBook(Long id) {
+        // Ellenőrizzük, hogy létezik-e a könyv
         if (bookRepository.existsById(id)) {
+            // Ha igen, töröljük
             bookRepository.deleteById(id);
             return true;
         }
-        return false; // Ha nem létezik a könyv, akkor nem történik semmi
+        return false; // Ha nem létezik, akkor nem törlünk semmit
     }
 }
