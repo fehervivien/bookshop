@@ -1,71 +1,265 @@
-bookshop/
-├── .github/
-│   └── workflows/
-│       └── ci.yml
-├── .git/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── example/
-│   │   │           └── bookshop/
-│   │   │               ├── BookshopApplication.java
-│   │   │               ├── controller/
-│   │   │               │   ├── Autowired.java
-│   │   │               │   ├── BookController.java
-│   │   │               │   ├── CustomerController.java
-│   │   │               │   ├── DeleteMapping.java
-│   │   │               │   ├── GetMapping.java
-│   │   │               │   ├── OrderController.java
-│   │   │               │   ├── PathVariable.java
-│   │   │               │   ├── PostMapping.java
-│   │   │               │   ├── PutMapping.java
-│   │   │               │   ├── RequestBody.java
-│   │   │               │   ├── RequestMapping.java
-│   │   │               │   └── RestController.java
-│   │   │               ├── entity/
-│   │   │               │   ├── Book.java
-│   │   │               │   ├── Customer.java
-│   │   │               │   ├── Entity.java
-│   │   │               │   ├── GeneratedValue.java
-│   │   │               │   ├── Id.java
-│   │   │               │   ├── JoinColumn.java
-│   │   │               │   ├── ManyToOne.java
-│   │   │               │   ├── Order.java
-│   │   │               │   └── Table.java
-│   │   │               ├── repository/
-│   │   │               │   ├── BookRepository.java
-│   │   │               │   ├── CustomerRepository.java
-│   │   │               │   ├── OrderRepository.java
-│   │   │               │   └── Repository.java
-│   │   │               └── service/
-│   │   │                   ├── BookService.java
-│   │   │                   ├── CustomerService.java
-│   │   │                   ├── OrderService.java
-│   │   │                   ├── OrderServiceImpl.java
-│   │   │                   └── Service.java
-│   │   ├── resources/
-│   │   │   ├── application.properties
-│   │   │   └── static/
-│   │   │       └── index.html
-│   │   └── test/
-│   │       └── java/
-│   │           └── com/
-│   │               └── example/
-│   │                   └── bookshop/
-│   │                       └── BookControllerTest.java
-├── target/
-│   ├── classes/
-│   │   ├── application.properties
-│   │   └── static/
-│   │       └── index.html
-│   ├── generated-sources/
-│   │   └── annotations/
-│   └── maven-status/
-│       └── maven-compiler-plugin/
-│           └── compile/
-│               └── default-compile/
-│                   ├── inputFiles.lst
-│                   └── createdFiles.lst
-├── pom.xml
-└── README.md
+|   mappa-struktura.txt
+|   parancsok.txt
+|   pom.xml
+|   README.md
+|
++---.github
+|   \---workflows
+|           ci.yml
+|
++---.idea
+|       .gitignore
+|       compiler.xml
+|       encodings.xml
+|       jarRepositories.xml
+|       misc.xml
+|       vcs.xml
+|       workspace.xml
+|
++---src
+|   +---main
+|   |   +---java
+|   |   |   \---com
+|   |   |       \---example
+|   |   |           \---bookshop
+|   |   |               |   BookshopApplication.java
+|   |   |               |
+|   |   |               +---controller
+|   |   |               |       BookController.java
+|   |   |               |       CustomerController.java
+|   |   |               |       OrderController.java
+|   |   |               |
+|   |   |               +---entity
+|   |   |               |       Book.java
+|   |   |               |       Customer.java
+|   |   |               |       Order.java
+|   |   |               |
+|   |   |               +---repository
+|   |   |               |       BookRepository.java
+|   |   |               |       CustomerRepository.java
+|   |   |               |       OrderRepository.java
+|   |   |               |
+|   |   |               \---service
+|   |   |                       BookService.java
+|   |   |                       CustomerService.java
+|   |   |                       OrderService.java
+|   |   |                       OrderServiceImpl.java
+|   |   |
+|   |   \---resources
+|   |       |   application.properties
+|   |       |
+|   |       \---static
+|   |           |   book-list.html
+|   |           |   customer-list.html
+|   |           |   index.html
+|   |           |   order-detail.html
+|   |           |   order-list.html
+|   |           |
+|   |           \---css
+|   |                   bookshop.jpg
+|   |                   header.jpg
+|   |                   index.css
+|   |
+|   \---test
+|       \---java
+|           \---com
+|               \---example
+|                   \---bookshop
+|                       +---controller
+|                       |       BookControllerTest.java
+|                       |       CustomerControllerTest.java
+|                       |       OrderControllerTest.java
+|                       |
+|                       +---entity
+|                       |       BookTest.java
+|                       |       CustomerTest.java
+|                       |       OrderTest.java
+|                       |
+|                       +---repository
+|                       |       CustomerRepositoryTest.java
+|                       |
+|                       \---service
+|                               BookServiceTest.java
+|                               CustomerServiceTest.java
+|                               OrderServiceImplTest.java
+|                               OrderServiceTest.java
+|                               TestOrderServiceImpl.java
+|
+\---target
+    |   bookshop-1.0.0.jar
+    |   bookshop-1.0.0.jar.original
+    |   jacoco.exec
+    |
+    +---classes
+    |   |   application.properties
+    |   |
+    |   +---com
+    |   |   \---example
+    |   |       \---bookshop
+    |   |           |   BookshopApplication.class
+    |   |           |
+    |   |           +---controller
+    |   |           |       BookController.class
+    |   |           |       CustomerController.class
+    |   |           |       OrderController.class
+    |   |           |
+    |   |           +---entity
+    |   |           |       Book.class
+    |   |           |       Customer.class
+    |   |           |       Order.class
+    |   |           |
+    |   |           +---repository
+    |   |           |       BookRepository.class
+    |   |           |       CustomerRepository.class
+    |   |           |       OrderRepository.class
+    |   |           |
+    |   |           \---service
+    |   |                   BookService.class
+    |   |                   CustomerService.class
+    |   |                   OrderService.class
+    |   |                   OrderServiceImpl.class
+    |   |
+    |   \---static
+    |       |   book-list.html
+    |       |   customer-list.html
+    |       |   index.html
+    |       |   order-detail.html
+    |       |   order-list.html
+    |       |
+    |       \---css
+    |               bookshop.jpg
+    |               header.jpg
+    |               index.css
+    |
+    +---generated-sources
+    |   \---annotations
+    +---generated-test-sources
+    |   \---test-annotations
+    +---maven-archiver
+    |       pom.properties
+    |
+    +---maven-status
+    |   \---maven-compiler-plugin
+    |       +---compile
+    |       |   \---default-compile
+    |       |           createdFiles.lst
+    |       |           inputFiles.lst
+    |       |
+    |       \---testCompile
+    |           \---default-testCompile
+    |                   createdFiles.lst
+    |                   inputFiles.lst
+    |
+    +---site
+    |   \---jacoco
+    |       |   index.html
+    |       |   jacoco-sessions.html
+    |       |   jacoco.csv
+    |       |   jacoco.xml
+    |       |
+    |       +---com.example.bookshop
+    |       |       BookshopApplication.html
+    |       |       BookshopApplication.java.html
+    |       |       index.html
+    |       |       index.source.html
+    |       |
+    |       +---com.example.bookshop.controller
+    |       |       BookController.html
+    |       |       BookController.java.html
+    |       |       CustomerController.html
+    |       |       CustomerController.java.html
+    |       |       index.html
+    |       |       index.source.html
+    |       |       OrderController.html
+    |       |       OrderController.java.html
+    |       |
+    |       +---com.example.bookshop.entity
+    |       |       Book.html
+    |       |       Book.java.html
+    |       |       Customer.html
+    |       |       Customer.java.html
+    |       |       index.html
+    |       |       index.source.html
+    |       |       Order.html
+    |       |       Order.java.html
+    |       |
+    |       +---com.example.bookshop.service
+    |       |       BookService.html
+    |       |       BookService.java.html
+    |       |       CustomerService.html
+    |       |       CustomerService.java.html
+    |       |       index.html
+    |       |       index.source.html
+    |       |       OrderServiceImpl.html
+    |       |       OrderServiceImpl.java.html
+    |       |
+    |       \---jacoco-resources
+    |               branchfc.gif
+    |               branchnc.gif
+    |               branchpc.gif
+    |               bundle.gif
+    |               class.gif
+    |               down.gif
+    |               greenbar.gif
+    |               group.gif
+    |               method.gif
+    |               package.gif
+    |               prettify.css
+    |               prettify.js
+    |               redbar.gif
+    |               report.css
+    |               report.gif
+    |               session.gif
+    |               sort.gif
+    |               sort.js
+    |               source.gif
+    |               up.gif
+    |
+    +---surefire-reports
+    |       com.example.bookshop.controller.BookControllerTest.txt
+    |       com.example.bookshop.controller.CustomerControllerTest.txt
+    |       com.example.bookshop.controller.OrderControllerTest.txt
+    |       com.example.bookshop.entity.BookTest.txt
+    |       com.example.bookshop.entity.CustomerTest.txt
+    |       com.example.bookshop.entity.OrderTest.txt
+    |       com.example.bookshop.repository.CustomerRepositoryTest.txt
+    |       com.example.bookshop.service.BookServiceTest.txt
+    |       com.example.bookshop.service.CustomerServiceTest.txt
+    |       com.example.bookshop.service.OrderServiceImplTest.txt
+    |       com.example.bookshop.service.OrderServiceTest.txt
+    |       TEST-com.example.bookshop.controller.BookControllerTest.xml
+    |       TEST-com.example.bookshop.controller.CustomerControllerTest.xml
+    |       TEST-com.example.bookshop.controller.OrderControllerTest.xml
+    |       TEST-com.example.bookshop.entity.BookTest.xml
+    |       TEST-com.example.bookshop.entity.CustomerTest.xml
+    |       TEST-com.example.bookshop.entity.OrderTest.xml
+    |       TEST-com.example.bookshop.repository.CustomerRepositoryTest.xml
+    |       TEST-com.example.bookshop.service.BookServiceTest.xml
+    |       TEST-com.example.bookshop.service.CustomerServiceTest.xml
+    |       TEST-com.example.bookshop.service.OrderServiceImplTest.xml
+    |       TEST-com.example.bookshop.service.OrderServiceTest.xml
+    |
+    \---test-classes
+        \---com
+            \---example
+                \---bookshop
+                    +---controller
+                    |       BookControllerTest.class
+                    |       CustomerControllerTest.class
+                    |       OrderControllerTest.class
+                    |
+                    +---entity
+                    |       BookTest.class
+                    |       CustomerTest.class
+                    |       OrderTest.class
+                    |
+                    +---repository
+                    |       CustomerRepositoryTest.class
+                    |
+                    \---service
+                            BookServiceTest.class
+                            CustomerServiceTest.class
+                            OrderServiceImplTest$TestOrderServiceImpl.class
+                            OrderServiceImplTest.class
+                            OrderServiceTest.class
+                            TestOrderServiceImpl.class

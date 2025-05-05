@@ -14,7 +14,7 @@ import com.example.bookshop.repository.OrderRepository;
 
 // Ez egy "szolgáltatás" komponens
 @Service
-public class OrderServiceImpl implements OrderService {
+public abstract class OrderServiceImpl implements OrderService {
 
     /*
      * Privát mező az OrderRepository példányhoz,

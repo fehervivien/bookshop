@@ -1,6 +1,7 @@
 package com.example.bookshop.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.bookshop.entity.Order;
 
@@ -22,4 +23,8 @@ public interface OrderService {
 
     // Rendelés törlése ID alapján
     void deleteById(Long id);
+
+    Optional<Order> getOrderById(long l);
+
+    List<Order> getAllOrders();
 }

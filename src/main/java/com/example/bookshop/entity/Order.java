@@ -20,6 +20,7 @@ import jakarta.persistence.Table;
 @Entity
 // Az adatbázisban az "orders" nevű táblához lesz leképezve
 @Table(name = "orders")
+
 public class Order {
 
     // Id: a tábla elsődleges kulcsa (primary key)
@@ -112,4 +113,7 @@ public class Order {
         return "Order{id=" + id + ", orderDate=" + orderDate + "}";
     }
 
+    public void setId(long l) {
+        this.id = l;
+    }
 }
